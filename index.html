@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="css.css">
+	
+</head>
+<body>
+	<div class="hz-banner" id="hz">
+		<ul  id="demo1" style="left: -900px;">
+			<img src="img/5.jpg">
+			<img src="img/1.jpg">
+			<img src="img/2.jpg">
+			<img src="img/3.jpg">
+			<img src="img/4.jpg">
+			<img src="img/5.jpg">
+			<img src="img/1.jpg">
+		</ul>
+		<div class="buts" id="buts">
+			<span index = '1' class="on"></span>
+			<span index = '2' ></span>
+			<span index = '3' ></span>
+			<span index = '4' ></span>
+			<span index = '5' ></span>
+		</div>
+		<a href="javascript:;" class=" prev" id="prev" class="arrow">&lt;</a>
+    	<a href="javascript:;" class=" next" id="next" class="arrow">&gt;</a>
+	</div>
+
+	<script type="text/javascript">
+		window.onload = function(){
+			var list = document.getElementById('demo1'),
+				buts = document.getElementById('buts').getElementsByTagName('span'),
+				prev = document.getElementById('prev'),
+				next = document.getElementById('next'),
+				hz = document.getElementById('hz'),
+				index = 1
+				state = false;
+				//console.log(buts)
+			function showBut(){
+				for(var i=0; i<buts.length; i++){
+
+					if(buts[i].className == 'on'){
+						buts[i].className  = '';
+						break;
+					}
+				}
+				buts[index-1].className = 'on';
+			}
+			function animate(offset){
+				state = true;
+				var lastOffset = parseInt(list.style.left) + offset;
+				//var max = (list.getElementsByTagName('li').length-2)*offset;
+				var max = -4500;
+				var min = -900;
+				var time = 330;
+				var time_num = 3;
+				var speed  = offset/(time/time_num);
+
+				function go(){
+					if((speed < 0 && parseInt(list.style.left) >  lastOffset) || ( speed > 0 && parseInt(list.style.left) < lastOffset) ){
+							list.style.left = parseInt(list.style.left) + speed + 'px';
+							setTimeout(go, time_num);
+					}else{
+						state = false
+						if( lastOffset < max ){
+							list.style.left = -900 + 'px';	
+						}else if (lastOffset > min) {
+							list.style.left = -4500 + 'px'
+						}else{
+							list.style.left = lastOffset + 'px';
+						}
+					}
+				}
+				go();
+
+				
+			}
+			next.onclick = function(){
+				if(!state){
+					if(index == 5){
+						index = 1
+					}else{
+						++index
+					}
+					console.log(index)
+					showBut();
+					animate(-900)
+				}
+				
+			}
+
+			prev.onclick = function(){
+				if(!state){
+					if(index == 1){
+						index = 5
+					}else{
+						--index
+					}
+					console.log(index)
+					showBut();
+					animate(900)
+				}
+			}
+
+			hz.onmouseover = stop;
+			hz.onmouseout = play;
+			var timer;
+
+			function play(){
+				timer = setInterval(function(){
+					next.onclick()
+				},2000)
+			}
+			play();
+
+			function stop(){
+				clearInterval(timer)
+			}
+
+			for(var i=0; i<buts.length; i++){
+				buts[i].onclick = function(){
+					if (this.className == 'on') {return}
+					else{
+
+						var Myindex = parseInt(this.getAttribute('index'));
+						var offset = (Myindex - index) * -900;
+						animate(offset)
+						index = Myindex ;
+						showBut()
+
+
+					}
+				}
+				
+			}
+		}
+	</script>
+</body>
+</html>

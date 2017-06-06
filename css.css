@@ -1,0 +1,12 @@
+ul,li{list-style: none;}
+*{border: 0;padding: 0; margin: 0; list-style: none; text-decoration: none;}
+.hz-banner{width: 900px;height: 495px;position: relative; margin: 100px auto;overflow: hidden;}
+.hz-banner ul{position: absolute; display: block; height: inherit;width: 6300px;height: 495px;}
+.hz-banner ul li{float: left;width: 900px;}
+.hz-banner ul  img{float: left;}
+.hz-banner .buts{position: absolute; width: 900px; height: 32px; line-height: 32px; z-index: 100; text-align: center;bottom:0px;  background: #000; opacity: 0.8}
+.hz-banner .buts span{width: 16px;height: 16px;background: #f00; border-radius: 8px; display: inline-block; cursor: pointer;}
+.hz-banner .buts .on{background: #fff;}
+.hz-banner .prev ,.hz-banner .next{ top:45%;position: absolute; width: 30px; height: 30px; text-align: center; display: none; line-height: 30px; color: #fff; background: #000; opacity: 0.8}
+.hz-banner .next{right: 0;}
+.hz-banner:hover .prev , .hz-banner:hover  .next{display: block;}

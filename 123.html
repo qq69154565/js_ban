@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script type="text/javascript">
+		   function Parent () {
+			    this.names = ['kevin', 'daisy'];
+			    this.hh = ['kevin', 'daisy'];
+			    console.log(21312)
+			}
+
+			function Child () {
+ 				Parent.call(this);
+			}
+
+			//Child.prototype = new Parent(); 
+			Child.prototype  = Object.create(Parent.prototype)
+			var child1 = new Child();
+			//console.log(child1 )
+			
+
+		
+	</script>
+</body>
+</html>
